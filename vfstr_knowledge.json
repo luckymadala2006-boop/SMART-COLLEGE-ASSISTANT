@@ -1,0 +1,358 @@
+{
+  "university_info": {
+    "name": "Vignan's Foundation for Science, Technology & Research (VFSTR)",
+    "location": "Vadlamudi, Guntur, Andhra Pradesh, India - 522213",
+    "accreditation": "NAAC A+ Grade, Deemed-to-be University",
+    "contact": {
+      "phone": "+91-863-2344700",
+      "email": "admissions@vignan.ac.in",
+      "website": "www.vignan.ac.in"
+    }
+  },
+  "admission_timeline_2026": [
+    {
+      "event": "Application Phase Start",
+      "date": "January 15, 2026",
+      "details": "Online application portal opens for V-SAT 2026."
+    },
+    {
+      "event": "Application Closing Date",
+      "date": "February 25, 2026",
+      "details": "Last date to submit applications online or offline."
+    },
+    {
+      "event": "V-SAT 2026 Entrance Exam Window",
+      "date": "March 1 – April 15, 2026",
+      "details": "Computer-based test conducted in multiple slots across major cities."
+    },
+    {
+      "event": "Result Declaration",
+      "date": "April 30, 2026",
+      "details": "V-SAT rank list published on the official admission portal."
+    },
+    {
+      "event": "Counseling and Seat Allotment",
+      "date": "May 10 – June 5, 2026",
+      "details": "Merit-based counseling sessions at Vadlamudi campus."
+    },
+    {
+      "event": "Commencement of Classes",
+      "date": "July 1, 2026",
+      "details": "Orientation and academic sessions begin for B.Tech first year."
+    }
+  ],
+  "admission_process": {
+    "steps": [
+      {
+        "step": 1,
+        "name": "Online Registration",
+        "description": "Visit admissions.vignan.ac.in and register using mobile number and email."
+      },
+      {
+        "step": 2,
+        "name": "Application Submission",
+        "description": "Fill personal and academic details, upload required photos/certificates, and pay a non-refundable application fee of ₹1,200."
+      },
+      {
+        "step": 3,
+        "name": "Entrance Exam",
+        "description": "Appear for V-SAT, or submit scores of JEE Main or AP/TS EAPCET (EAMCET)."
+      },
+      {
+        "step": 4,
+        "name": "Counselling Session",
+        "description": "Attend physical or online counseling based on rank/percentile. Bring all original certificates for verification."
+      },
+      {
+        "step": 5,
+        "name": "Seat Allotment & Admission Fee Payment",
+        "description": "Once a seat is allocated, pay the admission processing fee of ₹20,000 (one-time) and the first-year tuition fee."
+      },
+      {
+        "step": 6,
+        "name": "Admission Confirmation",
+        "description": "Submit final documents and collect your University Admission Letter and ID card."
+      }
+    ],
+    "required_documents": [
+      "10th Class (SSC) Marksheet & Certificate",
+      "12th Class (Intermediate) Marksheet & Passing Certificate",
+      "Transfer Certificate (TC) & Conduct Certificate",
+      "Study & Bonafide Certificate (from 6th to 12th standard)",
+      "Entrance Exam Rank Card & Admit Card (V-SAT / JEE Main / EAPCET)",
+      "Aadhar Card / Identity Proof",
+      "Caste Certificate (if claiming reservation / scholarship category)",
+      "4 Recent Passport Size Color Photographs"
+    ]
+  },
+  "courses": [
+    {
+      "id": "btech-cse",
+      "degree": "B.Tech",
+      "name": "Computer Science and Engineering (CSE)",
+      "duration": "4 Years",
+      "stream": "Engineering",
+      "eligibility": "60% aggregate in 10+2 / Intermediate with PCM (Physics, Chemistry, Mathematics). Must qualify in V-SAT, JEE Main, or EAPCET.",
+      "annual_fee_category_a": 380000,
+      "annual_fee_category_b": 480000,
+      "description": "Focuses on software development, algorithms, artificial intelligence, operating systems, and computer networks.",
+      "career_scope": "Software Engineer, Web Developer, System Analyst, Cloud Architect, Data Engineer."
+    },
+    {
+      "id": "btech-aiml",
+      "degree": "B.Tech",
+      "name": "Artificial Intelligence and Machine Learning (AI & ML)",
+      "duration": "4 Years",
+      "stream": "Engineering",
+      "eligibility": "60% aggregate in 10+2 / Intermediate with PCM. Must qualify in V-SAT, JEE Main, or EAPCET.",
+      "annual_fee_category_a": 380000,
+      "annual_fee_category_b": 480000,
+      "description": "Specialized branch in machine learning, deep learning, computer vision, natural language processing, and neural networks.",
+      "career_scope": "AI Engineer, ML researcher, Data Scientist, Robotics Specialist."
+    },
+    {
+      "id": "btech-cyber",
+      "degree": "B.Tech",
+      "name": "Computer Science & Engineering - Cyber Security",
+      "duration": "4 Years",
+      "stream": "Engineering",
+      "eligibility": "60% aggregate in 10+2 / Intermediate with PCM. Must qualify in V-SAT, JEE Main, or EAPCET.",
+      "annual_fee_category_a": 380000,
+      "annual_fee_category_b": 480000,
+      "description": "Provides learning on security architectures, threat mitigation, network security, ethical hacking, and digital forensics.",
+      "career_scope": "Security Analyst, Penetration Tester, Cybersecurity Consultant, Cryptographer."
+    },
+    {
+      "id": "btech-ece",
+      "degree": "B.Tech",
+      "name": "Electronics and Communication Engineering (ECE)",
+      "duration": "4 Years",
+      "stream": "Engineering",
+      "eligibility": "60% aggregate in 10+2 / Intermediate with PCM. Must qualify in V-SAT, JEE Main, or EAPCET.",
+      "annual_fee_category_a": 300000,
+      "annual_fee_category_b": 400000,
+      "description": "Covers semiconductor devices, analog/digital circuits, VLSI, signal processing, embedded systems, and communication channels.",
+      "career_scope": "VLSI Design Engineer, Embedded Developer, Telecom Engineer, Hardware Architect."
+    },
+    {
+      "id": "btech-biotech",
+      "degree": "B.Tech",
+      "name": "Biotechnology",
+      "duration": "4 Years",
+      "stream": "Agriculture",
+      "eligibility": "60% aggregate in 10+2 / Intermediate with BiPC (Biology, Physics, Chemistry) or MPC. Must qualify in V-SAT, JEE, or EAPCET.",
+      "annual_fee_category_a": 220000,
+      "annual_fee_category_b": 300000,
+      "description": "Combines engineering principles with biological sciences for applications in healthcare, genetics, and environment.",
+      "career_scope": "Bio-informatician, Research Associate, Clinical Data Analyst, Pharmacologist."
+    },
+    {
+      "id": "btech-agri",
+      "degree": "B.Tech",
+      "name": "Agricultural Engineering",
+      "duration": "4 Years",
+      "stream": "Agriculture",
+      "eligibility": "60% aggregate in 10+2 / Intermediate with MPC or BiPC. Must qualify in V-SAT or EAPCET.",
+      "annual_fee_category_a": 220000,
+      "annual_fee_category_b": 300000,
+      "description": "Applies engineering principles to agricultural production, soil conservation, farming machinery, and food technology.",
+      "career_scope": "Agricultural Engineer, Irrigation Manager, Food Technologist, Farm Consultant."
+    },
+    {
+      "id": "mtech-cse",
+      "degree": "M.Tech",
+      "name": "M.Tech Computer Science & Engineering",
+      "duration": "2 Years",
+      "stream": "Engineering",
+      "eligibility": "B.Tech/B.E. in relevant discipline with 50% aggregate. GATE or PGECET qualification required.",
+      "annual_fee_category_a": 100000,
+      "annual_fee_category_b": 150000,
+      "description": "Advanced postgraduate course focused on distributed systems, data mining, networks, and research practices.",
+      "career_scope": "Research Scientist, Project Lead, Senior Software Engineer, Academic Lecturer."
+    },
+    {
+      "id": "mba",
+      "degree": "MBA",
+      "name": "Master of Business Administration",
+      "duration": "2 Years",
+      "stream": "Management",
+      "eligibility": "Graduation with minimum 55% aggregate marks. Must clear ICET, CAT, MAT, or VUG-CET.",
+      "annual_fee_category_a": 160000,
+      "annual_fee_category_b": 240000,
+      "description": "Specializations in Marketing, Finance, HR, Operations, and Business Analytics.",
+      "career_scope": "Business Consultant, HR Manager, Financial Analyst, Marketing Lead."
+    },
+    {
+      "id": "mca",
+      "degree": "MCA",
+      "name": "Master of Computer Applications",
+      "duration": "2 Years",
+      "stream": "Management",
+      "eligibility": "Graduation in BCA/B.Sc/B.Com with Mathematics at 10+2 level. ICET or qualifying exam score.",
+      "annual_fee_category_a": 120000,
+      "annual_fee_category_b": 180000,
+      "description": "Advanced software and web application development skills, database management, and mobile computing.",
+      "career_scope": "Database Administrator, Web Programmer, IT Consultant, Systems Manager."
+    },
+    {
+      "id": "bpharmacy",
+      "degree": "B.Pharmacy",
+      "name": "Bachelor of Pharmacy",
+      "duration": "4 Years",
+      "stream": "Pharmacy",
+      "eligibility": "60% aggregate in 10+2 / Intermediate with MPC or BiPC. AP/TS EAPCET or V-SAT qualification.",
+      "annual_fee_category_a": 180000,
+      "annual_fee_category_b": 260000,
+      "description": "Comprehensive study of drug formulation, pharmacology, clinical practices, and pharmaceutical chemistry.",
+      "career_scope": "Pharmacist, Drug Inspector, Quality Analyst, Clinical Trial Specialist."
+    },
+    {
+      "id": "phd",
+      "degree": "PhD",
+      "name": "Doctor of Philosophy (Engineering / Science)",
+      "duration": "3-5 Years",
+      "stream": "Science",
+      "eligibility": "Master's degree with 55% aggregate. Entrance test followed by interview.",
+      "annual_fee_category_a": 60000,
+      "annual_fee_category_b": 90000,
+      "description": "Research-oriented doctoral program in engineering, biotechnology, science, and humanities.",
+      "career_scope": "Academic Professor, Principal Researcher, R&D Lab Advisor."
+    }
+  ],
+  "scholarships": {
+    "description": "VFSTR offers attractive merit-based scholarships covering up to 100% of the tuition fee for engineering and non-engineering streams.",
+    "btech_VSAT_slabs": [
+      {
+        "slab": "100% Scholarship",
+        "vsat_rank": "Rank 1 to 100",
+        "jee_percentile": "> 98 percentile",
+        "eapcet_rank": "< 2000",
+        "inter_marks": "> 98% (or equivalent GPA)"
+      },
+      {
+        "slab": "50% Scholarship",
+        "vsat_rank": "Rank 101 to 500",
+        "jee_percentile": "95 - 98 percentile",
+        "eapcet_rank": "2001 - 5000",
+        "inter_marks": "95% - 97.9%"
+      },
+      {
+        "slab": "25% Scholarship",
+        "vsat_rank": "Rank 501 to 2000",
+        "jee_percentile": "90 - 94.9 percentile",
+        "eapcet_rank": "5001 - 15000",
+        "inter_marks": "90% - 94.9%"
+      },
+      {
+        "slab": "10% Scholarship",
+        "vsat_rank": "Rank 2001 to 5000",
+        "jee_percentile": "85 - 89.9 percentile",
+        "eapcet_rank": "15001 - 25000",
+        "inter_marks": "85% - 89.9%"
+      }
+    ],
+    "general_rules": [
+      "Scholarships are applicable on tuition fees only. Registration fees, hostel fees, and exam fees are extra.",
+      "To maintain the scholarship in subsequent years, students must maintain a CGPA of 7.0 or above with no active backlogs.",
+      "Approximately 25% of seats in each course are reserved for scholarship allotments."
+    ]
+  },
+  "hostels": {
+    "boys": {
+      "name": "NTR Boys Hostel",
+      "capacity": "1500+ Students",
+      "non_ac_fee_annual": 120000,
+      "ac_fee_annual": 150000
+    },
+    "girls": {
+      "name": "Priyamvada Girls Hostel",
+      "capacity": "1200+ Students",
+      "non_ac_fee_annual": 120000,
+      "ac_fee_annual": 150000
+    },
+    "amenities": [
+      "24/7 Security and CCTV surveillance",
+      "High-speed Wi-Fi in rooms and corridors",
+      "Hygienic vegetarian and non-vegetarian mess food (South Indian & North Indian varieties)",
+      "Daily laundry service included in the hostel fee",
+      "Fully equipped modern gymnasiums separate for boys and girls",
+      "In-house medical center with a resident doctor and 24/7 ambulance support",
+      "Indoor games (Table Tennis, Chess, Carrom) and outdoor basketball & shuttle courts"
+    ],
+    "rules": [
+      "In-time for hostels is 8:30 PM.",
+      "Outings are permitted only on Sundays with prior digital approvals from wardens.",
+      "No electrical appliances (heaters, irons) are allowed inside the hostel rooms."
+    ]
+  },
+  "placements": {
+    "placement_rate": "88%",
+    "highest_package": "44 LPA",
+    "average_package": "5.5 LPA",
+    "total_offers_2025": "1850+",
+    "students_placed_2025": "1300+",
+    "top_recruiters": [
+      "TCS (Tata Consultancy Services)",
+      "Cognizant",
+      "Accenture",
+      "Wipro",
+      "Infosys",
+      "Amazon",
+      "HCL Technologies",
+      "DXC Technology",
+      "IBM",
+      "Mindtree",
+      "Larsen & Toubro (L&T)",
+      "Bosch",
+      "Siemens"
+    ],
+    "training_programs": [
+      "Campus Recruitment Training (CRT) starts from the 2nd Year.",
+      "Coding workshops in Python, Java, and C++ organized by technical mentors.",
+      "Soft skills, mock interviews, and resume-building sessions run by the Training & Placement Cell.",
+      "English proficiency programs and Cambridge BEC certifications sponsored by the university."
+    ]
+  },
+  "campus_life": {
+    "clubs": [
+      {
+        "name": "Vignan Coding Club",
+        "type": "Technical",
+        "description": "Organizes weekly hackathons, coding contests, and algorithm sessions."
+      },
+      {
+        "name": "Inspiria (Cultural Club)",
+        "type": "Cultural",
+        "description": "Fosters dancing, singing, drama, photography, and arts."
+      },
+      {
+        "name": "Literary Seminars Club",
+        "type": "Literary",
+        "description": "Focuses on public speaking, debate, essay writing, and publication."
+      },
+      {
+        "name": "E-Cell (Entrepreneurship Cell)",
+        "type": "Innovation",
+        "description": "Provides incubation space, mentoring, and startup guides."
+      }
+    ],
+    "festivals": [
+      {
+        "name": "Mahotsav",
+        "type": "Annual National Youth Festival",
+        "description": "A 3-day mega fest attracting 20,000+ students from across India, featuring technical contests, cultural events, and celebrity nights."
+      },
+      {
+        "name": "Srujanankura",
+        "type": "National Tech Fest",
+        "description": "Showcase of projects, prototypes, papers, and tech innovations."
+      }
+    ],
+    "infrastructure": [
+      "Central Library with 100,000+ books and access to IEEE, Springer, and Scopus digital libraries.",
+      "State-of-the-art research laboratories and clean rooms.",
+      "Sports complex with synthetic running track, cricket ground, football field, and tennis courts.",
+      "Fully air-conditioned seminar halls and open-air theatres."
+    ]
+  }
+}

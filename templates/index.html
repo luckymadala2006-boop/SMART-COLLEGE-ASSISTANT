@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VFSTR Smart Admission Portal & AI Assistant</title>
+    
+    <!-- Google Fonts: Outfit & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Glassmorphic Stylesheet -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- Notification Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+        <div id="liveToast" class="toast align-items-center text-white bg-indigo border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMessage">Welcome to VFSTR Admissions!</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-xl sticky-top glass-nav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#" onclick="switchSection('home')">
+                <span class="logo-circle me-2">🎓</span>
+                <span class="brand-text">VFSTR <span class="accent-text">Admissions</span></span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="#" data-section="home" onclick="switchSection('home')">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="chat" onclick="switchSection('chat')">AI Assistant</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="courses" onclick="switchSection('courses')">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="admissions" onclick="switchSection('admissions')">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="scholarships" onclick="switchSection('scholarships')">Scholarships</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="hostels" onclick="switchSection('hostels')">Hostels</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="placements" onclick="switchSection('placements')">Placements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="campus" onclick="switchSection('campus')">Campus Life</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="dashboard" onclick="switchSection('dashboard')">Stats Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="profile" onclick="switchSection('profile')">Student Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-section="admin" onclick="switchSection('admin')"><i class="fa-solid fa-lock-open me-1"></i>Admin</a></li>
+                    
+                    <!-- Dark/Light Theme Toggle -->
+                    <li class="nav-item ms-3">
+                        <button class="btn btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Theme">
+                            <i class="fa-solid fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container my-5 py-2">
+        
+        <!-- SECTION 1: HERO / LANDING PAGE -->
+        <section id="section-home" class="view-section active-section">
+            <div class="row align-items-center min-vh-75 py-4">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <span class="badge bg-indigo-soft text-indigo px-3 py-2 rounded-pill mb-3 font-semibold">
+                        <i class="fa-solid fa-sparkles me-1 text-indigo"></i> Powered by IBM watsonx.ai & Granite
+                    </span>
+                    <h1 class="display-4 fw-extrabold mb-3 line-height-sm">
+                        Your Future at <span class="gradient-text">VFSTR</span> Starts Here.
+                    </h1>
+                    <p class="lead text-secondary mb-4">
+                        Explore NAAC A+ accredited courses, eligibility criteria, hostel services, and placement records. Consult with Rama Lakshmi, our RAG-powered AI Admission Assistant, to map your career goals.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <button class="btn btn-primary btn-lg px-4 py-2-5 rounded-pill shadow-glow" onclick="switchSection('chat')">
+                            <i class="fa-solid fa-comments me-2"></i> Start Chat
+                        </button>
+                        <button class="btn btn-outline-secondary btn-lg px-4 py-2-5 rounded-pill" onclick="switchSection('courses')">
+                            Explore Courses
+                        </button>
+                        <button class="btn btn-glass btn-lg px-4 py-2-5 rounded-pill" onclick="switchSection('admissions')">
+                            Admission Guide
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <div class="hero-image-wrapper position-relative">
+                        <div class="blob-bg position-absolute top-50 start-50 translate-middle"></div>
+                        <div class="glass-card chatbot-preview p-4 shadow-lg text-start mx-auto z-index-2 position-relative" style="max-width: 440px;">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="avatar bg-indigo text-white rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                                    <i class="fa-solid fa-robot"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold text-primary-text">Rama Lakshmi (Assistant)</h6>
+                                    <span class="badge bg-success-soft text-success"><i class="fa-solid fa-circle-check me-1"></i> RAG Knowledge Base</span>
+                                </div>
+                            </div>
+                            <div class="preview-bubble bg-light p-3 rounded-4 mb-2 text-dark text-sm">
+                                Hello! I can answer specific questions regarding B.Tech eligibility, NTR hostel rooms, scholarship ranks, or average placement packages. What are you looking to study?
+                            </div>
+                            <div class="preview-bubble bg-indigo text-white p-3 rounded-4 text-sm align-self-end ms-auto" style="max-width: 80%;">
+                                What is the average package for CSE placements?
+                            </div>
+                            <div class="preview-bubble bg-light p-3 rounded-4 text-dark text-sm mt-2">
+                                For CSE, the average placement package at VFSTR ranges from <strong>₹5.5 to ₹7 LPA</strong>, with a peak highest package of <strong>₹44 LPA</strong> offered by leading recruiting partners.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="row g-4 mt-5">
+                <h3 class="text-center fw-bold mb-4">Core Admission Services</h3>
+                <div class="col-md-4">
+                    <div class="card glass-card feature-card h-100 p-4 border-0 rounded-4" onclick="switchSection('chat')">
+                        <div class="icon-wrapper mb-3 text-indigo"><i class="fa-solid fa-microchip fs-3"></i></div>
+                        <h5 class="fw-bold mb-2">AI-Powered Advisor</h5>
+                        <p class="text-secondary text-sm mb-0">RAG-augmented, zero-hallucination support regarding fees, documents, fests, and deadlines.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card glass-card feature-card h-100 p-4 border-0 rounded-4" onclick="switchSection('courses')">
+                        <div class="icon-wrapper mb-3 text-purple"><i class="fa-solid fa-compass fs-3"></i></div>
+                        <h5 class="fw-bold mb-2">Course Explorer</h5>
+                        <p class="text-secondary text-sm mb-0">Search and filter across engineering, management, agriculture, and pharmacy programs.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card glass-card feature-card h-100 p-4 border-0 rounded-4" onclick="switchSection('scholarships')">
+                        <div class="icon-wrapper mb-3 text-pink"><i class="fa-solid fa-award fs-3"></i></div>
+                        <h5 class="fw-bold mb-2">Scholarship Estimator</h5>
+                        <p class="text-secondary text-sm mb-0">Calculate fee waivers (up to 100%) dynamically based on intermediate scores or V-SAT ranks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: AI CHAT PAGE -->
+        <section id="section-chat" class="view-section">
+            <div class="row g-4 justify-content-center">
+                <div class="col-xl-9">
+                    <div class="card glass-card border-0 rounded-4 overflow-hidden shadow-lg">
+                        <!-- Chat Header -->
+                        <div class="card-header border-bottom border-glass px-4 py-3 d-flex align-items-center justify-content-between bg-glass-header">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar bg-indigo text-white rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0 fw-bold text-primary-text">Rama Lakshmi - AI Admission Assistant</h5>
+                                    <span class="text-secondary text-xs" id="connectionStatus">
+                                        <i class="fa-solid fa-plug-circle-check text-success me-1"></i> Local DB & IBM Granite (Simulated)
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-outline-secondary rounded-pill" onclick="exportChat()" title="Download Chat History">
+                                    <i class="fa-solid fa-download me-1"></i> Export
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger rounded-pill" onclick="clearChatHistory()" title="Clear Chat History">
+                                    <i class="fa-solid fa-trash-can me-1"></i> Clear
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Chat Messages Window -->
+                        <div class="card-body chat-messages-window p-4" id="chatWindow">
+                            <!-- Bot Message -->
+                            <div class="chat-message bot-message d-flex mb-4">
+                                <div class="message-avatar me-3">🤖</div>
+                                <div class="message-content-wrapper">
+                                    <div class="message-bubble">
+                                        <p class="mb-0">hello i am Rama lakshmi your virtual admission assistant for Vignan's Foundation for Science, Technology & Research (VFSTR). I can guide you through our courses, fee structure, scholarships, hostel facilities, placement records, and the step-by-step admission process. How can I help you today?</p>
+                                    </div>
+                                    <span class="message-time">12:00 PM</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Typing Indicator -->
+                        <div class="typing-indicator px-4 py-2 d-none" id="typingIndicator">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="text-xs text-secondary ms-2">Rama Lakshmi is thinking...</span>
+                        </div>
+
+                        <!-- Suggested Chips -->
+                        <div class="quick-chips-wrapper border-top border-glass px-4 py-3 bg-glass-header overflow-auto whitespace-nowrap">
+                            <span class="badge badge-chip me-2" onclick="sendQuickQuery('What courses are offered?')">What courses are offered?</span>
+                            <span class="badge badge-chip me-2" onclick="sendQuickQuery('Eligibility for B.Tech AI & ML')">Eligibility for B.Tech AI & ML</span>
+                            <span class="badge badge-chip me-2" onclick="sendQuickQuery('What is the hostel fee?')">What is the hostel fee?</span>
+                            <span class="badge badge-chip me-2" onclick="sendQuickQuery('Show placement statistics')">Placement Statistics</span>
+                            <span class="badge badge-chip me-2" onclick="sendQuickQuery('What scholarships are available?')">Scholarships</span>
+                            <span class="badge badge-chip me-2" onclick="sendQuickQuery('What documents are required for counselling?')">Required Documents</span>
+                        </div>
+
+                        <!-- Input Controls -->
+                        <div class="card-footer border-top border-glass p-3 bg-glass-input">
+                            <form id="chatForm" onsubmit="submitChat(event)">
+                                <div class="input-group">
+                                    <button class="btn btn-outline-secondary border-0 px-3 text-secondary" type="button" id="micBtn" onclick="toggleSpeech()" title="Speech to Text">
+                                        <i class="fa-solid fa-microphone"></i>
+                                    </button>
+                                    <input type="text" class="form-control border-0 bg-transparent text-primary-text chat-input px-3" placeholder="Ask about fees, hostel rooms, placements, or type a career interest..." id="queryInput">
+                                    <button class="btn btn-indigo px-4 rounded-3 shadow-glow" type="submit">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: COURSE EXPLORER -->
+        <section id="section-courses" class="view-section">
+            <h2 class="fw-bold mb-2">VFSTR Academic Programs</h2>
+            <p class="text-secondary mb-4">Search, filter, and review details of engineering, science, management, pharmacy, and doctorates.</p>
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-6">
+                    <div class="input-group glass-input border border-glass rounded-pill overflow-hidden">
+                        <span class="input-group-text bg-transparent border-0 ps-3 text-secondary"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" class="form-control bg-transparent border-0" placeholder="Search by specialization (e.g. CSE, Biotech, MBA...)" id="courseSearch" onkeyup="filterCourses()">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex flex-wrap gap-2 justify-content-md-end">
+                        <button class="btn btn-glass active btn-sm rounded-pill px-3" onclick="filterCourseCategory('all', this)">All Streams</button>
+                        <button class="btn btn-glass btn-sm rounded-pill px-3" onclick="filterCourseCategory('Engineering', this)">Engineering</button>
+                        <button class="btn btn-glass btn-sm rounded-pill px-3" onclick="filterCourseCategory('Management', this)">Management</button>
+                        <button class="btn btn-glass btn-sm rounded-pill px-3" onclick="filterCourseCategory('Agriculture', this)">Agriculture / Biotech</button>
+                        <button class="btn btn-glass btn-sm rounded-pill px-3" onclick="filterCourseCategory('Pharmacy', this)">Pharmacy</button>
+                        <button class="btn btn-glass btn-sm rounded-pill px-3" onclick="filterCourseCategory('Science', this)">Research / Science</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Courses Grid -->
+            <div class="row g-4" id="coursesGrid">
+                <!-- Program cards will be dynamically output from JS -->
+            </div>
+        </section>
+
+        <!-- SECTION 4: ADMISSIONS (Timeline & Guide) -->
+        <section id="section-admissions" class="view-section">
+            <h2 class="fw-bold mb-2">VFSTR Admission Process & Guide</h2>
+            <p class="text-secondary mb-4">Step-by-step roadmap to secure your seat at Vignan's University.</p>
+
+            <div class="row g-5">
+                <div class="col-lg-8">
+                    <!-- Timeline -->
+                    <div class="timeline-wrapper">
+                        <h4 class="fw-bold mb-4"><i class="fa-solid fa-route me-2 text-indigo"></i> Counselling & Admission Timeline</h4>
+                        <div class="timeline" id="timelineList">
+                            <!-- Dynamic timeline items loaded by javascript -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <!-- Document Checklist -->
+                    <div class="card glass-card p-4 border-0 rounded-4 mb-4">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-file-invoice text-indigo me-2"></i> Documents Checklist</h5>
+                        <ul class="list-unstyled text-sm text-secondary mb-0" id="documentsList">
+                            <!-- Dynamic documents from js -->
+                        </ul>
+                    </div>
+
+                    <!-- Eligibility Form shortcut -->
+                    <div class="card bg-gradient-indigo-purple p-4 border-0 rounded-4 text-white">
+                        <h5 class="fw-bold mb-2 text-white">Eligible or Not?</h5>
+                        <p class="text-sm text-white-50 mb-3">Check if your scores qualify you for engineering or pharmacy in one click.</p>
+                        <button class="btn btn-white w-100 rounded-pill" onclick="switchSection('profile')">
+                            Verify Eligibility
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: SCHOLARSHIPS -->
+        <section id="section-scholarships" class="view-section">
+            <h2 class="fw-bold mb-2">Merit Scholarships</h2>
+            <p class="text-secondary mb-4">Vignan rewards academic excellence by offering comprehensive tuition fee waivers.</p>
+
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="card glass-card p-4 border-0 rounded-4">
+                        <h5 class="fw-bold mb-3 text-primary-text"><i class="fa-solid fa-calculator me-2 text-indigo"></i> Scholarship Fee Estimator</h5>
+                        <form id="scholarshipCalcForm" onsubmit="calculateScholarship(event)">
+                            <div class="mb-3">
+                                <label class="form-label text-sm text-secondary">Select Admission Entrance Exam</label>
+                                <select class="form-select glass-input text-primary-text border border-glass rounded-3" id="schExam">
+                                    <option value="V-SAT">V-SAT (Vignan Scholastic Aptitude Test)</option>
+                                    <option value="JEE Main">JEE Main (Percentile)</option>
+                                    <option value="EAPCET">AP / TS EAPCET (EAMCET Rank)</option>
+                                    <option value="Intermediate">Intermediate Board Marks (%)</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-sm text-secondary" id="scoreLabel">Enter Rank / Marks</label>
+                                <input type="number" step="any" class="form-control glass-input text-primary-text border border-glass rounded-3" id="schScore" placeholder="Enter score, rank or percentile..." required>
+                            </div>
+                            <button type="submit" class="btn btn-indigo w-100 rounded-pill shadow-glow">Estimate Waiver</button>
+                        </form>
+
+                        <div class="estimate-result-card d-none mt-4 p-3 rounded-4" id="estimateResult">
+                            <!-- Result filled via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card glass-card p-4 border-0 rounded-4 h-100">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-percent text-indigo me-2"></i> B.Tech Scholarship Ranks & Percentile Slabs</h5>
+                        <div class="table-responsive text-sm">
+                            <table class="table table-borderless align-middle text-secondary mb-0">
+                                <thead>
+                                    <tr class="border-bottom border-glass text-primary-text">
+                                        <th>Fee Waiver</th>
+                                        <th>V-SAT Rank</th>
+                                        <th>JEE Percentile</th>
+                                        <th>EAPCET Rank</th>
+                                        <th>Inter Marks</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scholarshipTableBody">
+                                    <!-- Dynamic slabs from JSON -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr class="border-glass my-3">
+                        <div class="text-xs text-secondary">
+                            <p class="mb-1">💡 <strong>Renewal Rules:</strong> Maintain CGPA &gt; 7.0 and pass all semesters in the first attempt to retain your scholarship in the subsequent academic years.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: HOSTELS & ACCOMMODATION -->
+        <section id="section-hostels" class="view-section">
+            <h2 class="fw-bold mb-2">Student Housing & Hostels</h2>
+            <p class="text-secondary mb-4">A safe, modern, and home-like atmosphere for domestic and international students.</p>
+
+            <div class="row g-4 mb-5">
+                <div class="col-md-6">
+                    <div class="card glass-card border-0 rounded-4 overflow-hidden h-100">
+                        <div class="p-4 bg-gradient-blue text-white">
+                            <h4 class="mb-1 text-white">NTR Boys Hostel</h4>
+                            <span class="text-white-50"><i class="fa-solid fa-building me-1"></i> Vadlamudi Campus (In-Campus)</span>
+                        </div>
+                        <div class="p-4 text-secondary">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><i class="fa-solid fa-users me-2 text-indigo"></i> Capacity: <strong>1,500+ Students</strong></li>
+                                <li class="mb-2"><i class="fa-solid fa-snowflake me-2 text-info"></i> AC Rooms Fee: <strong>₹1,50,000 / year</strong></li>
+                                <li class="mb-2"><i class="fa-solid fa-fan me-2 text-secondary"></i> Non-AC Rooms Fee: <strong>₹1,20,000 / year</strong></li>
+                                <li><i class="fa-solid fa-wallet me-2 text-indigo"></i> Caution Deposit: <strong>₹5,000 (Refundable)</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card glass-card border-0 rounded-4 overflow-hidden h-100">
+                        <div class="p-4 bg-gradient-purple text-white">
+                            <h4 class="mb-1 text-white">Priyamvada Girls Hostel</h4>
+                            <span class="text-white-50"><i class="fa-solid fa-building me-1"></i> Vadlamudi Campus (In-Campus)</span>
+                        </div>
+                        <div class="p-4 text-secondary">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><i class="fa-solid fa-users me-2 text-indigo"></i> Capacity: <strong>1,200+ Students</strong></li>
+                                <li class="mb-2"><i class="fa-solid fa-snowflake me-2 text-info"></i> AC Rooms Fee: <strong>₹1,50,000 / year</strong></li>
+                                <li class="mb-2"><i class="fa-solid fa-fan me-2 text-secondary"></i> Non-AC Rooms Fee: <strong>₹1,20,000 / year</strong></li>
+                                <li><i class="fa-solid fa-wallet me-2 text-indigo"></i> Caution Deposit: <strong>₹5,000 (Refundable)</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amenities and rules -->
+            <div class="row g-4">
+                <div class="col-md-8">
+                    <div class="card glass-card p-4 border-0 rounded-4">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-star text-indigo me-2"></i> Facilities & Amenities Provided</h5>
+                        <div class="row g-3" id="hostelAmenities">
+                            <!-- Dynamic hostel amenities -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card glass-card p-4 border-0 rounded-4 h-100">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-circle-exclamation text-indigo me-2"></i> Important Hostel Rules</h5>
+                        <ul class="list-unstyled text-sm text-secondary" id="hostelRules">
+                            <!-- Dynamic hostel rules -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: PLACEMENTS -->
+        <section id="section-placements" class="view-section">
+            <h2 class="fw-bold mb-2">Training & Placement Records</h2>
+            <p class="text-secondary mb-4">Empowering students to stand out and secure employment at global tech firms.</p>
+
+            <div class="row g-4 mb-4 text-center">
+                <div class="col-6 col-lg-3">
+                    <div class="card glass-card p-3 border-0 rounded-4">
+                        <h3 class="fw-bold text-indigo" id="highestPkg">44 LPA</h3>
+                        <span class="text-xs text-secondary uppercase">Highest Package</span>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="card glass-card p-3 border-0 rounded-4">
+                        <h3 class="fw-bold text-indigo" id="avgPkg">5.5 LPA</h3>
+                        <span class="text-xs text-secondary uppercase">Average Package</span>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="card glass-card p-3 border-0 rounded-4">
+                        <h3 class="fw-bold text-indigo" id="placementRate">88%</h3>
+                        <span class="text-xs text-secondary uppercase">Placement Rate</span>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="card glass-card p-3 border-0 rounded-4">
+                        <h3 class="fw-bold text-indigo" id="offersCount">1850+</h3>
+                        <span class="text-xs text-secondary uppercase">Total Offers</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-7">
+                    <div class="card glass-card p-4 border-0 rounded-4">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-chart-line text-indigo me-2"></i> Recruiters and placement metrics</h5>
+                        <div class="chart-container" style="position: relative; height:320px;">
+                            <canvas id="placementChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="card glass-card p-4 border-0 rounded-4 h-100">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-circle-nodes text-indigo me-2"></i> Top Recruiting Partners</h5>
+                        <div class="d-flex flex-wrap gap-2 mb-4" id="recruitersList">
+                            <!-- Dynamic recruiters -->
+                        </div>
+                        <h5 class="fw-bold mb-2"><i class="fa-solid fa-chalkboard-user text-indigo me-2"></i> Placement Training Programs</h5>
+                        <ul class="list-unstyled text-sm text-secondary mb-0" id="placementTraining">
+                            <!-- Dynamic placement training from json -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: CAMPUS LIFE -->
+        <section id="section-campus" class="view-section">
+            <h2 class="fw-bold mb-2">Vibrant Campus Life</h2>
+            <p class="text-secondary mb-4">Engage, innovate, and develop hobbies outside the classrooms.</p>
+
+            <div class="row g-4 mb-5">
+                <h4 class="fw-bold"><i class="fa-solid fa-people-group text-indigo me-2"></i> Student Clubs & Chapters</h4>
+                <div class="row g-4" id="campusClubs">
+                    <!-- Dynamic clubs -->
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="card glass-card p-4 border-0 rounded-4 h-100">
+                        <h4 class="fw-bold mb-3"><i class="fa-solid fa-guitar text-indigo me-2"></i> Festivals & Events</h4>
+                        <div class="timeline-events" id="campusFestivals">
+                            <!-- Dynamic festivals -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card glass-card p-4 border-0 rounded-4 h-100">
+                        <h4 class="fw-bold mb-3"><i class="fa-solid fa-city text-indigo me-2"></i> Infrastructure and Research</h4>
+                        <ul class="list-unstyled text-sm text-secondary" id="campusInfrastructure">
+                            <!-- Dynamic infrastructure -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 9: STATS DASHBOARD -->
+        <section id="section-dashboard" class="view-section">
+            <h2 class="fw-bold mb-2">VFSTR Analytics & Admission Stats</h2>
+            <p class="text-secondary mb-4">Overview of campus capacity, category distributions, and real-time portal statistics.</p>
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="card glass-card p-4 border-0 rounded-4 text-center">
+                        <h4 class="text-secondary text-sm fw-semibold mb-2">Offered Specializations</h4>
+                        <h2 class="display-5 fw-bold text-indigo">25+</h2>
+                        <span class="text-xs text-secondary">UG, PG and Doctorates</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card glass-card p-4 border-0 rounded-4 text-center">
+                        <h4 class="text-secondary text-sm fw-semibold mb-2">Total Scholarship Budget</h4>
+                        <h2 class="display-5 fw-bold text-indigo">₹15 Cr+</h2>
+                        <span class="text-xs text-secondary">Sanctioned yearly for merit</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card glass-card p-4 border-0 rounded-4 text-center">
+                        <h4 class="text-secondary text-sm fw-semibold mb-2">Student Diversity</h4>
+                        <h2 class="display-5 fw-bold text-indigo">12,000+</h2>
+                        <span class="text-xs text-secondary">Students from 20+ States</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card glass-card p-4 border-0 rounded-4">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-chart-pie me-2 text-indigo"></i> Department Distribution</h5>
+                        <div class="chart-container" style="position: relative; height:300px;">
+                            <canvas id="deptDistributionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card glass-card p-4 border-0 rounded-4 h-100">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-check-double me-2 text-indigo"></i> Admission Status & Live Notice</h5>
+                        <ul class="list-unstyled text-sm text-secondary">
+                            <li class="mb-3 d-flex align-items-start">
+                                <span class="badge bg-success-soft text-success me-2 mt-1">Open</span>
+                                <div>
+                                    <strong class="text-primary-text">B.Tech Category B Admissions (2026 Batch)</strong>
+                                    <p class="mb-0 text-xs">Direct walk-in admissions are open against remaining seats under Category B merit.</p>
+                                </div>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start">
+                                <span class="badge bg-warning-soft text-warning me-2 mt-1">Processing</span>
+                                <div>
+                                    <strong class="text-primary-text">Scholarship Letters Despatched</strong>
+                                    <p class="mb-0 text-xs">Initial merit lists for V-SAT scholarship letters have been dispatched.</p>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-start">
+                                <span class="badge bg-indigo-soft text-indigo me-2 mt-1">Information</span>
+                                <div>
+                                    <strong class="text-primary-text">Hostel Seat Allotments (NTR/Priyamvada)</strong>
+                                    <p class="mb-0 text-xs">Room allotment requests for first-semester students start from July 10, 2026.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 10: STUDENT PROFILE & ELIGIBILITY CHECKER -->
+        <section id="section-profile" class="view-section">
+            <h2 class="fw-bold mb-2">Student Portal</h2>
+            <p class="text-secondary mb-4">Save your educational profile to activate personalized eligibility checking, bookmarks, and search history.</p>
+
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="card glass-card p-4 border-0 rounded-4">
+                        <h5 class="fw-bold mb-3" id="profileFormTitle"><i class="fa-solid fa-user-pen me-2 text-indigo"></i> Create Student Profile</h5>
+                        <form id="profileForm" onsubmit="saveProfile(event)">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label text-sm text-secondary">Full Name</label>
+                                    <input type="text" class="form-control glass-input text-primary-text border border-glass rounded-3" id="profName" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-sm text-secondary">Email Address</label>
+                                    <input type="email" class="form-control glass-input text-primary-text border border-glass rounded-3" id="profEmail" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-sm text-secondary">Phone Number</label>
+                                    <input type="tel" class="form-control glass-input text-primary-text border border-glass rounded-3" id="profPhone">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-sm text-secondary">Intermediate Stream</label>
+                                    <select class="form-select glass-input text-primary-text border border-glass rounded-3" id="profEducation">
+                                        <option value="MPC">MPC (Maths, Physics, Chemistry)</option>
+                                        <option value="BiPC">BiPC (Biology, Physics, Chemistry)</option>
+                                        <option value="Graduation">Graduation (For M.Tech/MBA)</option>
+                                        <option value="Other">Others</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-sm text-secondary">Class 12th Score (%)</label>
+                                    <input type="number" step="any" class="form-control glass-input text-primary-text border border-glass rounded-3" id="profMarks" placeholder="e.g. 85.5">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-sm text-secondary">Preferred Program</label>
+                                    <input type="text" class="form-control glass-input text-primary-text border border-glass rounded-3" id="profPrefCourse" placeholder="e.g. B.Tech CSE">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label text-sm text-secondary">Career Goal / Primary Interests</label>
+                                    <textarea class="form-control glass-input text-primary-text border border-glass rounded-3" id="profCareerGoal" rows="2" placeholder="e.g. I want to build AI models and secure a package in product development..."></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-indigo w-100 rounded-pill mt-4 shadow-glow">Save Profile</button>
+                        </form>
+                        
+                        <div class="mt-3 d-none text-center" id="logoutSection">
+                            <button class="btn btn-sm btn-outline-danger px-3 rounded-pill" onclick="logoutProfile()">Sign Out / Remove Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- Eligibility Output Card (Dynamic based on profile saved) -->
+                    <div class="card glass-card p-4 border-0 rounded-4 mb-4 d-none" id="eligibilityResultCard">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-graduation-cap me-2 text-indigo"></i> Personalized Eligible Programs</h5>
+                        <div id="eligibilityList" class="text-sm text-secondary"></div>
+                    </div>
+
+                    <!-- Bookmarks -->
+                    <div class="card glass-card p-4 border-0 rounded-4 mb-4">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-bookmark me-2 text-indigo"></i> Bookmarked Responses</h5>
+                        <div class="list-group list-group-flush" id="bookmarksContainer">
+                            <div class="text-sm text-secondary py-2 text-center" id="noBookmarksText">No bookmarks saved yet. Log in and bookmark Q&A bubbles inside the AI chat interface.</div>
+                        </div>
+                    </div>
+
+                    <!-- Search History -->
+                    <div class="card glass-card p-4 border-0 rounded-4">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-clock-rotate-left me-2 text-indigo"></i> Recent Search History</h5>
+                        <div class="d-flex flex-wrap gap-2" id="searchHistoryContainer">
+                            <span class="text-xs text-secondary" id="noHistoryText">No search history.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 11: ADMIN PANEL -->
+        <section id="section-admin" class="view-section">
+            <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+                <div>
+                    <h2 class="fw-bold mb-1">Administrator Control Panel</h2>
+                    <p class="text-secondary mb-0">System telemetry, recent query logs, and customizable FAQs.</p>
+                </div>
+                <span class="badge bg-success-soft text-success px-3 py-2 rounded-pill"><i class="fa-solid fa-server me-1"></i> System Online</span>
+            </div>
+
+            <!-- Stats -->
+            <div class="row g-4 mb-4 text-center">
+                <div class="col-md-3">
+                    <div class="card glass-card p-3 border-0 rounded-4">
+                        <h3 class="fw-bold text-indigo" id="adminTotalChats">0</h3>
+                        <span class="text-xs text-secondary uppercase">Conversations Logged</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card glass-card p-3 border-0 rounded-4">
+                        <h3 class="fw-bold text-indigo" id="adminTotalStudents">0</h3>
+                        <span class="text-xs text-secondary uppercase">Profiles Registered</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card glass-card p-3 border-0 rounded-4">
+                        <h3 class="fw-bold text-indigo" id="adminTotalFaqs">0</h3>
+                        <span class="text-xs text-secondary uppercase">DB FAQs Loaded</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card glass-card p-3 border-0 rounded-4">
+                        <h3 class="fw-bold text-success">Active</h3>
+                        <span class="text-xs text-secondary uppercase">RAG Engine Status</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Log Additions -->
+                <div class="col-lg-5">
+                    <div class="card glass-card p-4 border-0 rounded-4 mb-4">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-plus me-2 text-indigo"></i> Add Custom FAQ Rule</h5>
+                        <form id="addFaqForm" onsubmit="addFaq(event)">
+                            <div class="mb-3">
+                                <label class="form-label text-sm text-secondary">Question Keyword/Phrase</label>
+                                <input type="text" class="form-control glass-input text-primary-text border border-glass rounded-3" id="faqQuest" placeholder="e.g. When is the induction day?" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-sm text-secondary">Answer Content</label>
+                                <textarea class="form-control glass-input text-primary-text border border-glass rounded-3" id="faqAnsw" rows="3" placeholder="Provide accurate and formal university policy details..." required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-sm text-secondary">Category</label>
+                                <input type="text" class="form-control glass-input text-primary-text border border-glass rounded-3" id="faqCate" placeholder="e.g. Induction, Timeline">
+                            </div>
+                            <button type="submit" class="btn btn-indigo w-100 rounded-pill shadow-glow">Insert FAQ to DB</button>
+                        </form>
+                    </div>
+
+                    <!-- FAQ List -->
+                    <div class="card glass-card p-4 border-0 rounded-4" style="max-height: 480px; overflow-y: auto;">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-list me-2 text-indigo"></i> Active Database FAQs</h5>
+                        <div class="list-group list-group-flush text-sm text-secondary" id="adminFaqList">
+                            <!-- Dynamic database FAQs -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Logs Table -->
+                <div class="col-lg-7">
+                    <div class="card glass-card p-4 border-0 rounded-4">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-receipt me-2 text-indigo"></i> Real-time Assistant Conversation Logs</h5>
+                        <div class="table-responsive text-sm" style="max-height: 520px; overflow-y: auto;">
+                            <table class="table table-borderless text-secondary align-middle">
+                                <thead>
+                                    <tr class="border-bottom border-glass text-primary-text">
+                                        <th style="width: 120px;">Timestamp</th>
+                                        <th>Student Query</th>
+                                        <th>Bot response</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminLogsTableBody">
+                                    <!-- Dynamic logs -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer border-top border-glass py-5 mt-5 bg-glass-footer">
+        <div class="container text-center">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-4 text-md-start">
+                    <h5 class="fw-bold text-primary-text mb-2">VFSTR Smart Admissions</h5>
+                    <p class="text-xs text-secondary mb-0">An official agentic assistant for Vignan's Foundation for Science, Technology & Research.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="d-flex justify-content-center gap-3 text-secondary text-lg mb-2">
+                        <i class="fa-brands fa-laravel" title="IBM Cloud" style="display:none;"></i>
+                        <span class="badge bg-indigo-soft text-indigo px-3 py-1">IBM Cloud</span>
+                        <span class="badge bg-indigo-soft text-indigo px-3 py-1">watsonx.ai</span>
+                        <span class="badge bg-indigo-soft text-indigo px-3 py-1">IBM Granite</span>
+                    </div>
+                    <span class="text-xs text-secondary">Leveraging IBM Orchestrate & RAG Architectures</span>
+                </div>
+                <div class="col-md-4 text-md-end text-xs text-secondary">
+                    &copy; 2026 VFSTR University. All Rights Reserved.<br>
+                    Designed with Bootstrap 5 and Glassmorphism.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Marked.js (Markdown Parser for Chatbot Markdown messages) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Chart.js library for placement analytics charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom Frontend Logic Script -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
