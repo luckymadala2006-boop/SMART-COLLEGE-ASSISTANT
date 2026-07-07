@@ -34,3 +34,12 @@ if __name__ == '__main__':
     print("Running locally at: http://127.0.0.1:5000")
     print("="*50 + "\n")
     app.run(host='0.0.0.0', port=5000, debug=True)
+def create_app():
+    app = Flask(__name__)
+    ...
+    return app
+
+app = create_app()
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
